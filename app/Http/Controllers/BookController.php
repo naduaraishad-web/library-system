@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Book; // Import class Model-nya
 
 class BookController extends Controller
 {
@@ -10,13 +11,9 @@ class BookController extends Controller
     {
         $title = 'Daftar Buku';
         $description = 'Daftar buku yang tersedia di perpustakaan.';
-        $books = [
-            'Pemrograman PHP',
-            'Laravel untuk Pemula',
-            'Basis Data',
-            'Algoritma dan Pemrograman',
-            'Pemrograman Berorientasi Objek'
-        ];
+        
+        // Ambil SEMUA data dari tabel books di database
+        $books = Book::all();
         
         return view('books.index', compact('title', 'description', 'books'));
     }
