@@ -1,15 +1,28 @@
 @extends('layouts.app')
 @section('title', 'Daftar Buku')
 @section('content')
-    <h2>{{ $title }}</h2>
-    <p>{{ $description }}</p>
+    <h2>Daftar Buku</h2>
+    <a href="{{ route('books.create') }}" style="display:inline-block; margin-bottom:15px; padding:5px 10px; background:blue; color:white; text-decoration:none;">+ Tambah Buku</a>
     
-    @foreach($books as $book)
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-            <h3>{{ $book->title }}</h3>
-            <p>Penulis: {{ $book->author }}</p>
-            <p>Tahun: {{ $book->year }}</p>
-            <p>Stok: {{ $book->stock }}</p>
-        </div>
-    @endforeach
+    <table border="1" cellpadding="10" cellspacing="0" width="100%">
+        <tr>
+            <th>Judul</th><th>Penulis</th><th>Tahun</th><th>Stok</th><th>Aksi</th>
+        </tr>
+        @foreach($books as $book)
+        <tr>
+            <td>{{ $book->title }}</td>
+            <td>{{ $book->author }}</td>
+            <td>{{ $book->year }}</td>
+            <td>{{ $book->stock }}</td>
+            <td>
+                <a href="{{ route('books.edit', $book) }}">Edit</a> |
+                <form action="{{ route('books.destroy', $book) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Yakin mau dihapus?')">Hapus</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </table>
 @endsection
