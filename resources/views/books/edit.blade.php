@@ -10,5 +10,17 @@
         <p>Tahun: <input type="number" name="year" value="{{ $book->year }}"></p>
         <p>Stok: <input type="number" name="stock" value="{{ $book->stock }}"></p>
         <button type="submit">Update</button>
+        <div style="margin-bottom: 10px;">
+    <label for="category_id">Kategori</label>
+<select name="category_id" class="form-control" required>
+    <option value="">-- Pilih Kategori --</option>
+    @foreach($categories as $category)
+        <option value="{{ $category->id }}" {{ $book->category_id == $category->id ? 'selected' : '' }}>
+            {{ $category->name }}
+        </option>
+    @endforeach
+</select>
+    @error('category_id') <div style="color:red; font-size:12px;">{{ $message }}</div> @enderror
+</div>
     </form>
 @endsection

@@ -6,11 +6,17 @@
     
     <table border="1" cellpadding="10" cellspacing="0" width="100%">
         <tr>
-            <th>Judul</th><th>Penulis</th><th>Tahun</th><th>Stok</th><th>Aksi</th>
+            <th>Judul</th>
+            <th>Kategori</th> <!-- Tambahan header kolom baru -->
+            <th>Penulis</th>
+            <th>Tahun</th>
+            <th>Stok</th>
+            <th>Aksi</th>
         </tr>
         @foreach($books as $book)
         <tr>
             <td>{{ $book->title }}</td>
+            <td>{{ $book->category->name }}</td>
             <td>{{ $book->author }}</td>
             <td>{{ $book->year }}</td>
             <td>{{ $book->stock }}</td>

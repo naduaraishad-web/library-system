@@ -24,6 +24,16 @@
             <input type="number" name="stock" value="{{ old('stock') }}">
             @error('stock') <div style="color:red; font-size:12px;">{{ $message }}</div> @enderror
         </div>
+        <div style="margin-bottom: 10px;">
+    <label for="category_id">Kategori</label><br>
+    <select name="category_id" class="form-control" required>
+    <option value="">-- Pilih Kategori --</option>
+    @foreach($categories as $category)
+        <option value="{{ $category->id }}">{{ $category->name }}</option>
+    @endforeach
+</select>
+    @error('category_id') <div style="color:red; font-size:12px;">{{ $message }}</div> @enderror
+</div>
         <button type="submit">Simpan</button>
     </form>
 @endsection
