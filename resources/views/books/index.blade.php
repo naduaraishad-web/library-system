@@ -34,5 +34,8 @@
     <form action="{{ route('logout') }}" method="POST">
     @csrf
     <button type="submit">Logout</button>
+    @can('manage-users')
+    <a href="{{ route('users.index') }}">Kelola Pengguna</a>
+@endcan
 </form>
 @endsection

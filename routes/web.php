@@ -1,26 +1,29 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
-// Mengarahkan halaman utama otomatis ke halaman login
 Route::get('/', function () {
     return redirect('/login');
 });
 
-// Route untuk yang belum login
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 });
 
-// Route untuk logout
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
 
-// Route halaman buku (hanya bisa diakses kalau sudah login)
+// Route yang bisa diakses Admin & Petugas
 Route::middleware('auth')->group(function () {
     Route::resource('books', BookController::class);
+});
+
+// Route KHUSUS ADMIN (Dilindungi Gate manage-users)
+Route::middleware(['auth', 'can:manage-users'])->group(function () {
+    Route::resource('users', UserController::class);
 });
