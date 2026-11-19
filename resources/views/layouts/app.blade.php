@@ -12,6 +12,7 @@
             <a href="/books">Books</a> |
             <a href="/categories">Categories</a> |
             <a href="/members">Members</a>
+            | <a href="{{ route('borrowings.index') }}">Borrowings</a>
         </nav>
         <hr>
     </header>
