@@ -62,4 +62,9 @@ public function store(Request $request)
         $book->delete();
         return redirect()->route('books.index');
     }
+    public function show(Book $book)
+{
+    $book->load('category');
+    return view('books.show', compact('book'));
+}
 }

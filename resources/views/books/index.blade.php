@@ -23,6 +23,8 @@
             <td>{{ $book->stock }}</td>
             <td>
                 <a href="{{ route('books.edit', $book) }}">Edit</a> |
+                <a href="{{ route('books.show', $book->id) }}">Detail</a> |
+                <a href="{{ route('books.edit', $book->id) }}">Edit</a> |
                 <form action="{{ route('books.destroy', $book) }}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
